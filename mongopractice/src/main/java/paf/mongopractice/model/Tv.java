@@ -32,7 +32,8 @@ public class Tv {
         this.url = url;
     }
 
-    public static Tv create (Document doc){
+    //Create tv object from tv document in database
+    public static Tv createTv (Document doc){
         Tv tvshow = new Tv();
         tvshow.setId(doc.getInteger(FIELD_ID));
         tvshow.setName(doc.getString(FIELD_NAME));

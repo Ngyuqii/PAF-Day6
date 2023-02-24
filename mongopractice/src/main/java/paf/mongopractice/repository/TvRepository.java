@@ -15,19 +15,19 @@ import static paf.mongopractice.model.Constants.*;
 public class TvRepository {
 
     @Autowired
-    private MongoTemplate template;
+    private MongoTemplate mTemplate;
 
-    //Get all shows by language
+    //Method to get all shows by language
     //db.tv.find({language: { $regex: 'english', $options: 'i' }})
     public List<Document> findShowsByLanguage(String lang) {
 
         //Create crtieria
-        Criteria c = Criteria.where(FIELD_LANGUAGE).regex(lang, "i");
         //Criteria c = Criteria.where(FIELD_LANGUAGE).is(lang);
-
+        Criteria c = Criteria.where(FIELD_LANGUAGE).regex(lang, "i");
+        
         //Create and perform a query
         Query q = Query.query(c);
-        return template.find(q, Document.class, COLLECTION);
+        return mTemplate.find(q, Document.class, COLLECTION);
 
     }
     

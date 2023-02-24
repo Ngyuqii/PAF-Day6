@@ -12,9 +12,9 @@
 	<artifactId>mongopractice</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>mongopractice</name>
-	<description>Practice for PAF-Day6</description>
+	<description>Practice code for PAF-Day6</description>
 	<properties>
-		<java.version>17</java.version>
+		<java.version>19</java.version>
 	</properties>
 	<dependencies>
 		<dependency>

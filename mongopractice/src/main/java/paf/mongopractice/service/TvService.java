@@ -14,10 +14,11 @@ public class TvService {
     @Autowired
     private TvRepository tvRepo;
 
+    //Method to get all shows by language, returns tv object
     public List<Tv> findTvShowsByLanguage(String lang) {
         return tvRepo.findShowsByLanguage(lang)
             .stream()
-            .map(v -> Tv.create(v))
+            .map(v -> Tv.createTv(v))
             .toList();
     }
     
