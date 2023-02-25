@@ -55,23 +55,21 @@ public class Tv {
         tvShow.setUrl(doc.getString(FIELD_URL));
         tvShow.setType(doc.getString(FIELD_TYPE));
 
-        try {
-            if (doc.getDouble(FIELD_RATING_AVERAGE) == null) {
-                tvShow.setRatingAvg(0);
+        //Get rating obj (cast document) to access average field
+        //Catch all double / integer / null values
+        Document rating = ((Document)doc.get(FIELD_RATING));
+        try{
+            if (rating.getDouble(FIELD_AVERAGE) == null) {
+                tvShow.setRatingAvg(Float.NaN);
             }
             else {
-                tvShow.setRatingAvg(doc.getDouble(FIELD_RATING_AVERAGE).floatValue());
+                tvShow.setRatingAvg(rating.getDouble(FIELD_AVERAGE).floatValue());
             }
-            		  
-        } catch (Exception e) {
-            tvShow.setRatingAvg(doc.getInteger(FIELD_RATING_AVERAGE).floatValue());
-        } 
+        }
+        catch (Exception e){
+            tvShow.setRatingAvg(rating.getInteger(FIELD_AVERAGE).floatValue());
+        }
         return tvShow;
     }
-
-    
-
-    
-
     
 }

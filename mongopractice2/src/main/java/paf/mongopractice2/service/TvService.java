@@ -20,8 +20,8 @@ public class TvService {
     }
 
     //Method to list out tvshows under the requested type
-    public List<Tv> findShowsByType(String type) {
-        return tvRepo.findShowsByType(type)
+    public List<Tv> findShowsByType(String type, Integer limit) {
+        return tvRepo.findShowsByType(type, limit)
             .stream()
             .map(v -> Tv.createTv(v))
             .toList();
@@ -34,5 +34,5 @@ public class TvService {
             .map(v -> Tv.createTv(v))
             .toList();
     }
-    
+
 }

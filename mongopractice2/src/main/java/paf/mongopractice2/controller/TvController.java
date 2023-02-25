@@ -30,8 +30,8 @@ public class TvController {
 
     // GET /tvshow/type/{type}
 	 @GetMapping(path="/tvshow/type/{type}")
-	 public String getTvShowByType(@PathVariable String type, Model model) {
-		 List<Tv> results = tvSvc.findShowsByType(type);
+	 public String getTvShowByType(@PathVariable String type, @RequestParam(defaultValue = "20") Integer limit, Model model) {
+		 List<Tv> results = tvSvc.findShowsByType(type, limit);
 		 model.addAttribute("tvshows", results);
 		 model.addAttribute("showType", type);
 		 return "tvshowsbytype";

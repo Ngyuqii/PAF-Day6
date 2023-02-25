@@ -24,7 +24,7 @@ public class TvRepository {
     //db.tv.distinct("type")
     public List<String> getTypes() {
         List<String> result = mTemplate.findDistinct(new Query(), FIELD_TYPE, COLLECTION, String.class);
-        Collections.sort(result);
+        Collections.sort(result); //default sort ascending
         return result;
     }
 
@@ -34,26 +34,22 @@ public class TvRepository {
 			type: { $regex: 'Animation', $options: 'i' }
 		})
 		.sort({ "rating.average": -1 })
-		.projection({ _id: 0, id: 1, name: 1, "rating.average": 1 })
+		.projection({ _id: 0, id: 1, name: 1, url: 1, "rating.average": 1 })
 		.limit(20)
 	  */
-	 public List<Document> findShowsByType(String type) {
-        return getShowsByType(type, 20);
-    }
+    public List<Document> findShowsByType(String type, int limit) {
 
-    public List<Document> getShowsByType(String type, int limit) {
+       Criteria c = Criteria.where(FIELD_TYPE).regex(type, "i");
 
-       Criteria criteria = Criteria.where(FIELD_TYPE).regex(type, "i");
-
-       Query query = Query.query(criteria)
+       Query q = Query.query(c)
             .with(Sort.by(Direction.DESC, FIELD_RATING_AVERAGE))
             .limit(limit);
 
-       query.fields()
+       q.fields()
             .exclude(FIELD_PKID)
             .include(FIELD_ID, FIELD_NAME, FIELD_URL, FIELD_RATING_AVERAGE);
 
-       return mTemplate.find(query, Document.class, COLLECTION);
+       return mTemplate.find(q, Document.class, COLLECTION);
     }
 
     //Method to get all shows by language
