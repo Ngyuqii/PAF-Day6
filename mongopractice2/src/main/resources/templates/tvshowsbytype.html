@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>TV Shows By Type</title>
+	</head>
+	<body>
+		<h1>Show Type - <span data-th-text="${showType}"></span></h1>
+
+		<h3 data-th-each="tv: ${tvshows}">
+			<a data-th-href="${tv.url}">
+				<span data-th-text="${tv.name}"></span>
+				(Rating <span data-th-text="${tv.ratingAvg}"></span>)
+			</a>
+		</h3>
+	</body>
+</html>
